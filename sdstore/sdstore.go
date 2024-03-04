@@ -357,6 +357,7 @@ func (s *sdStore) putFile(url *url.URL, bodyType string, filePath string) error 
 
 	defer s.client.HTTPClient.CloseIdleConnections()
 
+	req.Header.Set("Expect", "100-continue")
 	req.Header.Set("Authorization", tokenHeader(s.token))
 	req.Header.Set("Content-Type", bodyType)
 	if fi, err := os.Stat(filePath); err == nil {
